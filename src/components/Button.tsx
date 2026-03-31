@@ -1,5 +1,3 @@
-import { styles } from "../pages/Register.tsx/styles";
-
 type ButtonProps = {
   text: string;
   onClick: () => void;
