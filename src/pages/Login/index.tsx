@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
 import { styles } from "./styles";
+import { useNavigate } from "react-router-dom";
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedEmail = localStorage.getItem("email");
@@ -15,7 +17,8 @@ const Login: React.FC = () => {
   }, []);
 
   const handleLogin = () => {
-    alert("Login Successful ");
+   
+     navigate("/home");
   };
 
   return (
