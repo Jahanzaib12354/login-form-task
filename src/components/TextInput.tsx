@@ -6,6 +6,7 @@ type TextInputProps = {
   placeholder?: string;
   style?: React.CSSProperties; 
   type: string;
+  
 };
 
 const TextInput: React.FC<TextInputProps> = ({ value, onChange, placeholder="something",

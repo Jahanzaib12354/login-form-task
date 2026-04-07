@@ -1,5 +1,4 @@
 
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
@@ -11,6 +10,7 @@ import Home from "./pages/Home";
 import Product1 from "./pages/Product1";
 import Product2 from "./pages/Product2";
 import Product3 from "./pages/Product3";
+import { UserProvider } from "./context/UserContext";
 
 const AppWrapper: React.FC = () => {
   const location = useLocation();
@@ -21,7 +21,7 @@ const AppWrapper: React.FC = () => {
     <>
       {showNavFooter && <Navbar />}
 
-      <div style={{ paddingBottom: showNavFooter ? "60px" : "0" }}>
+      <div style={{ paddingBottom: showNavFooter ? "30px" : "0" }}>
         <Routes>
           <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -40,9 +40,12 @@ const AppWrapper: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
-      <AppWrapper />
+      <UserProvider>   {/* ✅ UserProvider wrap */}
+        <AppWrapper />
+      </UserProvider>
     </Router>
   );
 };
 
 export default App;
+

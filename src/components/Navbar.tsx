@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { UserContext } from "../context/UserContext"; // ✅ import context
 
 const Navbar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false); // submenu toggle
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, setUser } = useContext(UserContext); 
 
   const currentPath = location.pathname;
 
-  const mainMenuName = "Services"; // professional name
+  const mainMenuName = "Services";
 
   const serviceNames: { [key: string]: string } = {
     "/product1": "Consulting",
@@ -18,9 +20,15 @@ const Navbar: React.FC = () => {
 
   const displayName = serviceNames[currentPath] || mainMenuName;
 
-  // Toggle submenu when main menu is clicked
   const handleMenuClick = () => {
     setShowMenu((prev) => !prev);
+  };
+  
+
+  const handleLogout = () => {
+    setUser(null); // logout
+    // localStorage.removeItem("email");
+    navigate("/login");
   };
 
   return (
@@ -31,12 +39,10 @@ const Navbar: React.FC = () => {
         </span>
 
         <div style={dropdownStyle}>
-          {/* Main menu clickable */}
           <span style={linkStyle} onClick={handleMenuClick}>
             {displayName} <span style={{ fontSize: "12px" }}>▼</span>
           </span>
 
-          {/* Show submenu only on click */}
           {showMenu && (
             <div style={submenuStyle}>
               {Object.entries(serviceNames).map(([path, name]) => (
@@ -50,7 +56,7 @@ const Navbar: React.FC = () => {
                   }}
                   onClick={() => {
                     navigate(path);
-                    setShowMenu(false); // close submenu after click
+                    setShowMenu(false);
                   }}
                 >
                   {name}
@@ -59,6 +65,17 @@ const Navbar: React.FC = () => {
             </div>
           )}
         </div>
+      </div>
+
+      {/* ✅ User info + Logout */}
+      <div>
+        {user ? (
+          <>
+            <button onClick={handleLogout}>Logout</button>
+          </>
+        ) : (
+          <span>Guest</span>
+        )}
       </div>
     </div>
   );
@@ -104,3 +121,4 @@ const subItem: React.CSSProperties = {
   margin: "5px 0",
   cursor: "pointer",
 };
+

@@ -1,4 +1,3 @@
-// src/components/Footer.tsx
 import React from "react";
 
 const Footer: React.FC = () => {
@@ -16,7 +15,11 @@ const footerStyle: React.CSSProperties = {
   color: "white",
   textAlign: "center",
   padding: "15px",
-  position: "fixed", // stays at bottom of the screen
-  bottom: 0,
-  width: "87%",
+  width: "97.5%",
+
+  // min-height:10vh,
+  // box-sizing:border-box,
+  // boxSizing:"border-box"
+
+  // marginTop: "20px", // space before footer
 };
